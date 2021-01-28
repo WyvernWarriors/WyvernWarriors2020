@@ -51,7 +51,7 @@ public class basicDrive extends OpMode {
 
     intakeMotor.setDirection(DcMotor.Direction.FORWARD);
     beltMotor.setDirection(DcMotor.Direction.FORWARD);
-    shooterMotor.setDirection(DcMotor.Direction.FORWARD); */
+    shooterMotor.setDirection(DcMotor.Direction.FORWARD); 
 
     //drive code
     
