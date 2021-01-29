@@ -1,4 +1,8 @@
-import jdk.jfr.internal.dcmd.DCmdCheck;
+
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.util.ElapsedTime;
+import com.qualcomm.robotcore.hardware.DcMotor;
 
 @Autonomous(name="basic auto : onion", group="Linear Opmode")
 
@@ -20,10 +24,20 @@ public class BasicAuto extends LinearOpMode {
     public void runOpMode() {
 
         //initialization stuff
+        
+        frontLeft = hardwareMap.get(DcMotor.class, "frontLeft");
+        frontRight = hardwareMap.get(DcMotor.class, "frontRight");
+        backLeft = hardwareMap.get(DcMotor.class, "backLeft");
+        backRight = hardwareMap.get(DcMotor.class, "backRight");
+        
+        frontLeft.setDirection(DcMotor.Direction.FORWARD);
+        frontRight.setDirection(DcMotor.Direction.REVERSE);
+        backLeft.setDirection(DcMotor.Direction.FORWARD);
+        backRight.setDirection(DcMotor.Direction.REVERSE);
+        
+        //robot.init(hardwareMap);
 
-        robot.init(hardwareMap);
-
-        telemetry.addData("Onion auto running !!");    //logging
+        telemetry.addLine("Onion auto running !!");    //logging
         telemetry.update();
 
         // reset encoders
@@ -31,8 +45,13 @@ public class BasicAuto extends LinearOpMode {
         frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         backLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         backRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-                
-        // set motors to run forward for 5000 encoder counts.
+        
+        telemetry.addData("Path0",  "Starting at %7d :%7d",
+                          frontLeft.getCurrentPosition(),
+                          backRight.getCurrentPosition());
+        telemetry.update();
+        
+                // set motors to run forward for 5000 encoder counts.
         frontLeft.setTargetPosition(5000);
         backLeft.setTargetPosition(5000);
         frontRight.setTargetPosition(5000);
@@ -43,22 +62,36 @@ public class BasicAuto extends LinearOpMode {
         frontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         backLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         backRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
+        
         //wait for driver to press play button
         waitForStart();
-
-        telemetry.addData("Running Auto");
-        telemetry.addData("encoder-back-left : ", backLeft.getCurrentPosition());
-        telemetry.addData("encoder-front-right", frontRight.getCurrentPosition());
-        telemetry.update();
-
+        
         // 
         backLeft.setPower(0.5);
         backRight.setPower(0.5);
         frontLeft.setPower(0.5);
         frontRight.setPower(0.5);
+        
+        while (opModeIsActive())   //leftMotor.getCurrentPosition() < leftMotor.getTargetPosition())
+        {
+            telemetry.addData("encoder-fwd-left", frontLeft.getCurrentPosition());
+            telemetry.addData("encoder-back-right", backRight.getCurrentPosition());
+            telemetry.update();
+            idle();
+        }
+        
+        backLeft.setPower(0);
+        backRight.setPower(0);
+        frontLeft.setPower(0);
+        frontRight.setPower(0);
+        
+        telemetry.addLine("Running Auto");
+        telemetry.update();
 
-
+        telemetry.addData("Path0",  "Currently at %7d :%7d",
+        frontLeft.getCurrentPosition(),
+        backRight.getCurrentPosition());
+        telemetry.update();
 
     }
 }
