@@ -61,8 +61,8 @@ public class basicDrive extends OpMode {
         speedMod = .5;
     }
 
-    double leftPower = deadband(gamepad1.left_stick_y) + deadband(gamepad1.right_stick_x);
-    double rightPower = deadband(gamepad1.left_stick_y) - deadband(gamepad1.right_stick_x);
+    double leftPower = deadband(gamepad1.left_stick_y) - deadband(gamepad1.right_stick_x);
+    double rightPower = deadband(gamepad1.left_stick_y) + deadband(gamepad1.right_stick_x);
     double motorLimit = .8;
 
     frontLeft.setPower(speedMod*leftPower*motorLimit);
