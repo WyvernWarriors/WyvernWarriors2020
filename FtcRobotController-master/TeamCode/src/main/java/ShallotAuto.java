@@ -100,3 +100,4 @@ public class ShallotAuto extends LinearOpMode {
                 telemetry.addLine("Auto Done !");
                 telemetry.update();
     }
+    }

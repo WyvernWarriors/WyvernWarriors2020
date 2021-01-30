@@ -43,22 +43,22 @@ public class BasicDrive extends OpMode {
         backRight.setDirection(DcMotor.Direction.REVERSE);
     
         //initializing mechanism motors
-        /*
+        
         intakeMotor = hardwareMap.get(DcMotor.class, "intakeMotor");
         beltMotor = hardwareMap.get(DcMotor.class, "beltMotor");
         shooterMotor = hardwareMap.get(DcMotor.class, "shooterMotor");
     
-        intakeMotor.setDirection(DcMotor.Direction.FORWARD);
+        intakeMotor.setDirection(DcMotor.Direction.REVERSE);
         beltMotor.setDirection(DcMotor.Direction.FORWARD);
-        shooterMotor.setDirection(DcMotor.Direction.FORWARD);
-        */
+        shooterMotor.setDirection(DcMotor.Direction.REVERSE);
+        
     }
 
     @Override
     public void loop() {
     //drive code
     
-        if(gamepad1.x) {
+    if(gamepad1.x) {
         speedMod = 1;
     } else if (gamepad1.y) {
         speedMod = .5;
@@ -80,16 +80,26 @@ public class BasicDrive extends OpMode {
         gamepad right trigger will run belt motor*
             *both triggers are pressure sensitive so there is some range of speeds you can go at !! 
     */
-    /*
-    if(gamepad1.a) {
+    
+    if(gamepad2.a) {
         intakeMotor.setPower(-1);
     } else {
         intakeMotor.setPower(0);
     }
-
+    /*
     shooterMotor.setPower(deadband(gamepad1.left_trigger));
     beltMotor.setPower(deadband(gamepad1.right_trigger));
     */
+    if(gamepad2.left_bumper) {
+        shooterMotor.setPower(1);
+    } else {
+        shooterMotor.setPower(0);
+    }
+    if(gamepad2.right_bumper) {
+        beltMotor.setPower(1);
+    } else {
+        beltMotor.setPower(0);
+    }
     }
 
     /**
