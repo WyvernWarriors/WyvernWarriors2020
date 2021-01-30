@@ -24,7 +24,7 @@ public class BasicAuto extends LinearOpMode {
     public void runOpMode() {
 
         //initialization stuff
-        
+        runtime.reset();
         frontLeft = hardwareMap.get(DcMotor.class, "frontLeft");
         frontRight = hardwareMap.get(DcMotor.class, "frontRight");
         backLeft = hardwareMap.get(DcMotor.class, "backLeft");
@@ -52,8 +52,8 @@ public class BasicAuto extends LinearOpMode {
         telemetry.update();
         
                 // set motors to run forward for 5000 encoder counts.
-        frontLeft.setTargetPosition(5000);
-        backLeft.setTargetPosition(5000);
+        frontLeft.setTargetPosition(5000); //1120 for neverest 40 should 
+        backLeft.setTargetPosition(5000); // go 1 full rotation
         frontRight.setTargetPosition(5000);
         backRight.setTargetPosition(5000);
         
@@ -67,30 +67,29 @@ public class BasicAuto extends LinearOpMode {
         waitForStart();
         
         // 
-        backLeft.setPower(0.5);
-        backRight.setPower(0.5);
-        frontLeft.setPower(0.5);
-        frontRight.setPower(0.5);
+        backLeft.setPower(1);
+        backRight.setPower(1);
+        frontLeft.setPower(1);
+        frontRight.setPower(1);
         
+        /*
         while (opModeIsActive())   //leftMotor.getCurrentPosition() < leftMotor.getTargetPosition())
         {
+            telemetry.addData("target position", frontLeft.getTargetPosition());
             telemetry.addData("encoder-fwd-left", frontLeft.getCurrentPosition());
             telemetry.addData("encoder-back-right", backRight.getCurrentPosition());
             telemetry.update();
             idle();
-        }
-        
-        backLeft.setPower(0);
-        backRight.setPower(0);
-        frontLeft.setPower(0);
-        frontRight.setPower(0);
-        
-        telemetry.addLine("Running Auto");
-        telemetry.update();
+        } */
 
-        telemetry.addData("Path0",  "Currently at %7d :%7d",
-        frontLeft.getCurrentPosition(),
-        backRight.getCurrentPosition());
+        if(leftMotor.getCurrentPosition() >= 5000) {
+            backLeft.setPower(0);
+            backRight.setPower(0);
+            frontLeft.setPower(0);
+            frontRight.setPower(0);
+        } 
+
+        telemetry.addLine("Auto Done !");
         telemetry.update();
 
     }
