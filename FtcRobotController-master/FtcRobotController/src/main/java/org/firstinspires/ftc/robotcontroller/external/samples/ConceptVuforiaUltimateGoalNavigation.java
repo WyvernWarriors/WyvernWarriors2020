@@ -109,8 +109,8 @@ public class ConceptVuforiaUltimateGoalNavigation extends LinearOpMode {
      * Once you've obtained a license key, copy the string from the Vuforia web site
      * and paste it in to your code on the next line, between the double quotes.
      */
-    private static final String VUFORIA_KEY =
-            " -- YOUR NEW VUFORIA KEY GOES HERE  --- ";
+    private static final String VUFORIA_KEY = 
+            "AQoGWaz/////AAABmZFnYF7q40esrPE63lH/QL5SK6gq4wRE6VnfOLwQsKCGkkM6hZJb3szviJEyhp6hDCNjPh1s4aMw8uQip2csPBZXoPCc7IwxgSVgmYEURP+7GHXzbgw1WGQmNCOt+SOiYYn9ogjSfaVRlDvqaa5IflkdJv3A4cpqXGt3NlKAM2rvrom8YjtuMqQCIyJl2HzGdaqOQae/Hx4B6zNifUsumX3oEuHoIIxAIWGd/x/G6X0lTn4nO9v5eoRrI7l1Ih0pRzAIMDFVEswAiqMnd9WPE4EhdYy7gLD2moNzhxX1f6KiOEuhb5S4lrzLSW3jXmEUqw5846nwlmvQtFKqgr368Gna10k9Wt2cHQFrOkDA7CMG";
 
     // Since ImageTarget trackables use mm to specifiy their dimensions, we must use mm for all the physical dimension.
     // We will define some constants and conversions here
