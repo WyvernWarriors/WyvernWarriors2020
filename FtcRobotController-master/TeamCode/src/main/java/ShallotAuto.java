@@ -46,10 +46,10 @@ public class ShallotAuto extends LinearOpMode {
                 telemetry.update();
                 
                 // set motors to run forward for 5000 encoder counts.
-                frontLeft.setTargetPosition(5200); //1120 for neverest 40 should 
-                backLeft.setTargetPosition(5200); // go 1 full rotation
-                frontRight.setTargetPosition(5200);
-                backRight.setTargetPosition(5200);
+                frontLeft.setTargetPosition(6000); //1120 for neverest 40 should 
+                backLeft.setTargetPosition(6000); // go 1 full rotation
+                frontRight.setTargetPosition(6000);
+                backRight.setTargetPosition(6000);
                 
 
                 

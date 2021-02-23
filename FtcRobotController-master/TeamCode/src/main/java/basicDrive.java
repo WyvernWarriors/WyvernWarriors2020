@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
 @TeleOp(name="Cool Teleop", group="Iterative Opmode")
-public class BasicDrive extends OpMode {
+public class basicDrive extends OpMode {
 
     private ElapsedTime runtime = new ElapsedTime();
 
@@ -83,6 +83,8 @@ public class BasicDrive extends OpMode {
     
     if(gamepad2.a) {
         intakeMotor.setPower(-1);
+    } else if(gamepad2.b) {
+        intakeMotor.setPower(1);
     } else {
         intakeMotor.setPower(0);
     }
