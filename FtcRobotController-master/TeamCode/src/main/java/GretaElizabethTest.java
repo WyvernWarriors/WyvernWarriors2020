@@ -22,6 +22,7 @@ public class GretaElizabethTest extends OpMode {
 
     //declaring mechanism motors
 
+    private Servo clawServo = null;
     private DcMotor armMotor = null;
     
     double speedMod = 1;
@@ -35,8 +36,6 @@ public class GretaElizabethTest extends OpMode {
         backLeft = hardwareMap.get(DcMotor.class, "backLeft");
         backRight = hardwareMap.get(DcMotor.class, "backRight");
     
-        armMotor = hardwareMap.get(DcMotor.class, "armMotor");
-
         frontLeft.setDirection(DcMotor.Direction.FORWARD);
         frontRight.setDirection(DcMotor.Direction.REVERSE);
         backLeft.setDirection(DcMotor.Direction.FORWARD);
@@ -44,7 +43,11 @@ public class GretaElizabethTest extends OpMode {
     
         //initializing mechanism motors
         
+        armMotor = hardwareMap.get(DcMotor.class, "armMotor");
+        servoMotor = hardwareMap.get(Servo.class, "clawServo");
 
+        armMotor.setDirection(DcMotor.Direction.FORWARD);
+        armMotor.setZeroPowerBehavior(BRAKE);
         
     }
 
@@ -58,6 +61,13 @@ public class GretaElizabethTest extends OpMode {
         speedMod = .5;
     }
 
+    if(gamepad2.x) {
+        clawServo.setPosition(0);
+    } 
+    if(gamepad2.y) {
+        clawServo.setPosition(1);
+    }
+
     
     double leftPower = deadband(gamepad1.left_stick_y) + deadband(gamepad1.right_stick_x);
     double rightPower = deadband(gamepad1.left_stick_y) - deadband(gamepad1.right_stick_x);
@@ -68,7 +78,7 @@ public class GretaElizabethTest extends OpMode {
     frontRight.setPower(speedMod*rightPower*motorLimit);
     backRight.setPower(speedMod*rightPower*motorLimit);
 
-    armMotor.setPower(gamepad2.left_stick_y*.8);
+    armMotor.setPower(deadband(gamepad2.left_stick_y*.8));
     
 
     //mechanisms controls
