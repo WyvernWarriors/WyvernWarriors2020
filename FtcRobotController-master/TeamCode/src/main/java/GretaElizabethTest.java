@@ -48,6 +48,7 @@ public class GretaElizabethTest extends OpMode {
 
         armMotor.setDirection(DcMotor.Direction.FORWARD);
         armMotor.setZeroPowerBehavior(BRAKE);
+
         
     }
 
@@ -78,7 +79,14 @@ public class GretaElizabethTest extends OpMode {
     frontRight.setPower(speedMod*rightPower*motorLimit);
     backRight.setPower(speedMod*rightPower*motorLimit);
 
-    armMotor.setPower(deadband(gamepad2.left_stick_y*.8));
+    if(deadband(gamepad2.left_stick_y)==0) {
+        armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        armMotor.setPosition(armMotor.getCurrentPosition());
+    } else {
+        armMotor.
+        armMotor.setPower(deadband(gamepad2.left_stick_y*.2));
+    }
+    
     
 
     //mechanisms controls
